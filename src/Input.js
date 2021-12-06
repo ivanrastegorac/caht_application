@@ -3,7 +3,8 @@ import React from "react";
 
 class Input extends Component {
   state = {
-    text: ""
+    text: "",
+    error:""
   }
 
   onChange(e) {
@@ -12,8 +13,13 @@ class Input extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    if(this.state.text === "") return;
     this.setState({text: ""});
     this.props.onSendMessage(this.state.text);
+  }
+
+  onFormSubmit = e => {
+    e.preventDefault();
   }
 
   render() {
@@ -28,6 +34,7 @@ class Input extends Component {
             autoFocus
           />
           <button>Send</button>
+          <p>{this.state.error}</p>
         </form>
       </div>
     );
